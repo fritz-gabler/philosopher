@@ -1,0 +1,4 @@
+gcc
+-Wall -Werror -Wextra
+-I./include
+-I./libs/include
