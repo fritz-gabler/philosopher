@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/16 11:40:23 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/17 19:51:17 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <sys/time.h>
+#include <limits.h>
 
 /*###############################DEFINITION##################################*/
 /*###########################################################################*/
@@ -61,28 +62,41 @@ typedef struct s_input
 typedef struct s_table
 {
 	int					nbr_of_philos;
-	char				*forks;
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
-	pthread_mutex_t		table_mutex;
+	pthread_mutex_t		*fork;
+	pthread_mutex_t		print_save;
+	long long			start_time_of_dinner;
 }	t_table;
-
-typedef struct s_status
-{
-	t_bool				philo_died;
-	int					is_sleeping;
-	t_table				*table;
-}	t_status;
 
 typedef struct s_philo
 {
-	int					nbr_of_philos;
+	pthread_t			philo;
+	int					id;
+	int					started_eating;
+	int					finished_eating;
 	pthread_mutex_t		philo_mutex;
-	t_status			*status;
+	t_table				*table;
 }	t_philo;
 
 /*################################FUNKTIONS##################################*/
 /*###########################################################################*/
+
+//INPUT
+void			get_input (t_input **input, int ac, char **av);
+int				is_input_valide (t_input *input);
+
+//ERROR
+void			error(int error);
+
+//UTLIS
+int				ft_isdigit(int c);
+long			ft_strtol(const char *str);
+int				ft_atoi(const char *str);
+
+//CREATE
+int	create_table(t_table **table, t_input *input);
+
 
 #endif

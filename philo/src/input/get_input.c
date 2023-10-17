@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_check.c                                      :+:      :+:    :+:   */
+/*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 16:31:51 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/13 16:37:09 by fgabler          ###   ########.fr       */
+/*   Created: 2023/10/17 14:26:57 by fgabler           #+#    #+#             */
+/*   Updated: 2023/10/17 14:33:53 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	input_check(t_input input)
+void	get_input (t_input **input, int ac, char **av)
 {
-	if (input.ac != 6)
-		return (error(WRONG_NUMBER_OF_ARGS), 1);
-	if (input.av[1] < 
+	(*input) = malloc(sizeof(t_input));
+	(*input)->ac = ac;
+	(*input)->av = av;
 }

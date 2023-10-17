@@ -1,4 +1,5 @@
-gcc
--Wall -Werror -Wextra
--I./include
--I./libs/include
+DS*
+.ccsl-cache
+.ccls-cache
+*.o
+.ccls

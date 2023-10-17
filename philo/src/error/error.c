@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:40:05 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/13 16:46:58 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/17 15:53:42 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,4 @@ void	error(int error)
 		printf("%sNumber of arguments is wrong\n%s", RED, RESET);
 	if (error == WRONG_NUMBER_OF_ARGS)
 		printf("%sNumber of arguments is wrong\n%s", RED, RESET);
-
 }

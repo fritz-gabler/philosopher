@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:36:26 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/15 20:03:02 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/17 18:40:35 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ void	*routine(void *arg)
 	test = (t_test *) arg;
 	pthread_mutex_lock(&test->mutex);
 	printf("NUM: %d\n", test->num++);
-    struct timeval tv;
-    struct timezone tz;
-    gettimeofday(&tv,&tz);
-	printf("TIME: %d\n", tv.tv_usec);
-	pthread_mutex_unlock(&test->mutex);
-	return arg;
-}
+	struct timeval  tv;
+	gettimeofday(&tv, NULL);
+	long long save_time = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000 ;
+	while (1)
