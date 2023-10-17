@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:41:40 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/17 20:01:10 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/17 22:21:42 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	create_forks (t_table *table);
 
 int	create_table(t_table **table, t_input *input)
 {
-	struct timeval	start_time;
 	t_table			*tmp_table;
 
 	tmp_table = malloc(sizeof(t_table));
@@ -46,3 +45,12 @@ static int	create_forks (t_table *table)
 	return (true);
 }
 
+void	get_start_time(t_table *table)
+{
+	struct timeval	start_time;
+	long long		time_in_mill;
+
+	gettimeofday(&start_time, NULL);
+	time_in_mill = (start_time.tv_sec) * 1000 + (start_time.tv_usec) / 1000;
+	table->start_time_of_dinner = time_in_mill;
+}

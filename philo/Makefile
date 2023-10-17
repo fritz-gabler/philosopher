@@ -8,28 +8,34 @@ NAME = philo
 
 CC			:=			cc
 HEADERS 	:=			-I./include
-CFLAGS		?=			-Wall -Werror -Wextra
+CFLAGS		?=			-Wall -Werror -Wextra -g
 
 ###############################################################################
 ###############################################################################
 
-VPATH		:=			src/main src/input_check
-SRC_INPUT	:=			input_check.c
+VPATH		:=			src/create src/error src/input src/main src/utils
+SRC_CREATE	:=			create_forks.c
+SRC_ERROR	:=			error.c
+SRC_INPUT	:=			input_check.c get_input.c
+SRC_MAIN	:=			philo.c
+SRC_UTILS	:=			ft_atoi.c ft_isdigit.c ft_strtol.c
+SRCS		:=			$(SRC_CREATE) $(SRC_ERROR) $(SRC_INPUT) $(SRC_MAIN)	\
+						$(SRC_UTILS)
 
 ###############################################################################
 ###############################################################################
 
 OBJ_DIR		:=			./_obj
-OBJ_SERVER	:=			$(addprefix $(OBJ_DIR)/, $(SRC_SERVER:%.c=%.o))
+OBJ			:=			$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 ###############################################################################
 ###############################################################################
 
-all: $(LIBS_NAME) $(SERVER) $(CLIENT)
+all: $(NAME)
 
-$(CLIENT): $(OBJ_CLIENT)
-	@$(CC) $(OBJ_CLIENT) $(LIBS_NAME) -o $(CLIENT)
-	@printf "$(_SUCCESS) client ready.\n"
+$(NAME): $(OBJ)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@printf "$(_SUCCESS) phlio executable is build.\n"
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p _obj
@@ -70,5 +76,5 @@ YE		=	\e[38;5;226m
 RE		=	\e[0m
 UP := "\033[A"
 CUT := "\033[K"
-_SUCCESS	=	[$(G)SUCCESS$(RE)]
+_SUCCESS	=	$(RE)[$(G)SUCCESS$(RE)]
 _INFO		=	[$(YE)INFO$(RE)]

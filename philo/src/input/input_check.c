@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:31:51 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/17 15:51:47 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/17 22:35:25 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	not_numer (t_input *input)
 	int		i;
 	int		j;
 
-	i = 0;
+	i = 1;
 	while (i < input->ac)
 	{
 		j = 0;
@@ -46,7 +46,7 @@ static int	not_numer (t_input *input)
 		}
 		i++;
 	}
-	return (0);
+	return (false);
 }
 
 static int	bigger_max_int (t_input *input)
