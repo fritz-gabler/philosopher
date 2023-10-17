@@ -14,7 +14,7 @@ CFLAGS		?=			-Wall -Werror -Wextra -g
 ###############################################################################
 
 VPATH		:=			src/create src/error src/input src/main src/utils
-SRC_CREATE	:=			create_forks.c
+SRC_CREATE	:=			create_table.c
 SRC_ERROR	:=			error.c
 SRC_INPUT	:=			input_check.c get_input.c
 SRC_MAIN	:=			philo.c

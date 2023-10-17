@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/17 19:51:17 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/17 23:01:30 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct s_philo
 	int					id;
 	int					started_eating;
 	int					finished_eating;
-	pthread_mutex_t		philo_mutex;
 	t_table				*table;
 }	t_philo;
 
