@@ -55,9 +55,9 @@ clean:
 fclean: clean
 	@echo $(RED)Cleaning executables...
 	@printf $(UP)$(CUT)
-	@if [ -f client ] && [ -f server ]; then \
-		echo $(RED)Cleaning"  "[$(SERVER) $(CLIENT)]...$(RESET); \
-		rm -f server client; \
+	@if [ -f $(NAME) ]; then \
+		echo $(RED)Cleaning"  "[$(NAME)]...$(RESET); \
+		rm -f $(NAME); \
 		echo $(GREEN)Cleaned!$(RESET); \
 	fi
 
