@@ -6,59 +6,51 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:36:26 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/17 18:40:35 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/24 17:30:45 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>
-#include <sys/time.h>
 
-typedef struct s_test
+int mails = 0;
+pthread_mutex_t mutex;
+
+void* routine() 
 {
-	pthread_mutex_t			mutex;
-	int						num;
-}	t_test;
-
-void	*routine(void *arg);
-
-int	main(int ac, char **av)
-{
-	pthread_t	th[11];
-	t_test		*test;
-
-	test = malloc(sizeof(t_test));
-	test->num = 0;
-	pthread_mutex_init(&test->mutex, NULL);
-	int			i;
-
-	i = 0;
-	while (i < 11)
-	{
-		if (pthread_create(th + i, NULL, &routine, test) != 0)
-			perror("Failed to create thread");
-		i++;
-	}
-	i = 0;
-	while (i < 11)
-	{
-		pthread_join(th[i], NULL);
-		i++;
-	}
-	pthread_mutex_destroy(&test->mutex);
-	free(test);
-	return (0);
+    for (int i = 0; i < 10000000; i++) {
+        pthread_mutex_lock(&mutex);
+        mails++;
+        pthread_mutex_unlock(&mutex);
+    }
+	return (NULL);
 }
 
-void	*routine(void *arg)
+void	create_mutex(pthread_mutex_t *lutex)
 {
-	t_test *test;
-	test = (t_test *) arg;
-	pthread_mutex_lock(&test->mutex);
-	printf("NUM: %d\n", test->num++);
-	struct timeval  tv;
-	gettimeofday(&tv, NULL);
-	long long save_time = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000 ;
-	while (1)
+	pthread_mutex_init(lutex, NULL);
+}
+
+int main(int argc, char* argv[]) {
+    pthread_t th[8];
+    int i;
+	create_mutex(&mutex);
+    for (i = 0; i < 8; i++) {
+        if (pthread_create(th + i, NULL, &routine, NULL) != 0) {
+            perror("Failed to create thread");
+            return 1;
+        }
+        printf("Thread %d has started\n", i);
+    }
+    for (i = 0; i < 8; i++) {
+        if (pthread_join(th[i], NULL) != 0) {
+            return 2;
+        }
+        printf("Thread %d has finished execution\n", i);
+    }
+    pthread_mutex_destroy(&mutex);
+    printf("Number of mails: %d\n", mails);
+    return 0;
+}
+

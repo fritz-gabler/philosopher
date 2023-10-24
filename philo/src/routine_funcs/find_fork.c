@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   find_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/20 00:38:11 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/22 09:34:56 by fgabler          ###   ########.fr       */
+/*   Created: 2023/10/22 09:28:16 by fgabler           #+#    #+#             */
+/*   Updated: 2023/10/22 09:33:26 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	routine(void *arg)
+int	find_next_fork(t_philo *philo)
 {
-	t_philo		*philo;
+	int pos_sec;
 
-	philo = (t_philo *) arg;
-	while (1)
-	{
-		pthread_mutex_lock(&philo->table->fork[philo->id]);
-		pthread_mutex_lock(&philo->table->fork[find_next_fork(philo)]);
-
-
-
-	}
+	pos_sec = philo->table->nbr_of_philos % philo->id;
+	return (pos_sec);
 }

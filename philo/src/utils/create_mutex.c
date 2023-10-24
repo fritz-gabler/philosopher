@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   create_mutex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/20 00:38:11 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/22 09:34:56 by fgabler          ###   ########.fr       */
+/*   Created: 2023/10/24 17:02:07 by fgabler           #+#    #+#             */
+/*   Updated: 2023/10/24 17:31:20 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	routine(void *arg)
+void	create_mutex(pthread_mutex_t *mutex)
 {
-	t_philo		*philo;
-
-	philo = (t_philo *) arg;
-	while (1)
-	{
-		pthread_mutex_lock(&philo->table->fork[philo->id]);
-		pthread_mutex_lock(&philo->table->fork[find_next_fork(philo)]);
-
-
-
-	}
+	pthread_mutex_init(mutex, NULL);
 }

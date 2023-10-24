@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   get_current_time_in_mill.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/20 00:38:11 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/22 09:34:56 by fgabler          ###   ########.fr       */
+/*   Created: 2023/10/24 12:35:23 by fgabler           #+#    #+#             */
+/*   Updated: 2023/10/24 12:37:46 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	routine(void *arg)
+long long	get_current_time_in_mill()
 {
-	t_philo		*philo;
+	struct timeval	start_time;
+	long long		time_in_mill;
 
-	philo = (t_philo *) arg;
-	while (1)
-	{
-		pthread_mutex_lock(&philo->table->fork[philo->id]);
-		pthread_mutex_lock(&philo->table->fork[find_next_fork(philo)]);
-
-
-
-	}
+	gettimeofday(&start_time, NULL);
+	time_in_mill = (start_time.tv_sec) * 1000 + (start_time.tv_usec) / 1000;
+	return (time_in_mill);
 }

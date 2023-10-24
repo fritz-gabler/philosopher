@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/17 23:01:30 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/24 19:02:53 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@
 # define ARG_BIGGER_MAX_INT			22444
 # define ARG_IS_NOT_NUMER			22445
 # define NOT_ENAUGE_PHILOS			22446
+# define FORK_IN_USE				22447
+# define FORK_IS_FREE				22447
+# define THINK						"is thinking"
 # define FORK						"has taken a fork"
 # define EAT						"is eating"
 # define SLEEP						"is sleeping"
-# define THINK						"is thinking"
 # define DIE						"died"
 
 /*################################INCLUDES###################################*/
@@ -61,21 +63,27 @@ typedef struct s_input
 
 typedef struct s_table
 {
-	int					nbr_of_philos;
-	int					time_to_die;
-	int					time_to_eat;
-	int					time_to_sleep;
-	pthread_mutex_t		*fork;
-	pthread_mutex_t		print_save;
-	long long			start_time_of_dinner;
+	unsigned int		nbr_of_philo;
+	unsigned int		time_to_die;
+	unsigned int		time_to_eat;
+	unsigned int		time_to_sleep;
+	unsigned int		time_each_philo_must_eat;
+	int					all_philos_alive;
+	long long			start_of_dinner;
+	pthread_mutex_t		protect_message;
+	pthread_t			*thread_ids;
+	void				*first_philo;
 }	t_table;
 
 typedef struct s_philo
 {
-	pthread_t			philo;
+	pthread_t			*philo;
 	int					id;
-	int					started_eating;
-	int					finished_eating;
+	int					fork;
+	pthread_mutex_t		protect_fork;
+	long long			started_eating;
+	int					times_eaten;
+	struct s_philo		*next_philo;
 	t_table				*table;
 }	t_philo;
 
@@ -93,9 +101,14 @@ void			error(int error);
 int				ft_isdigit(int c);
 long			ft_strtol(const char *str);
 int				ft_atoi(const char *str);
+long long		get_current_time_in_mill();
+void			create_mutex(pthread_mutex_t *mutex);
 
 //CREATE
-int	create_table(t_table **table, t_input *input);
+int				create_table(t_table **table, t_input *input);
 
+//ROUTINE_FUNCS
+int				find_next_fork(t_philo *philo);
+void			print_save(char *message, t_philo *philo);
 
 #endif
