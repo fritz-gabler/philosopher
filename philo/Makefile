@@ -14,13 +14,18 @@ CFLAGS		?=			-Wall -Werror -Wextra -g
 ###############################################################################
 
 VPATH		:=			src/create src/error src/input src/main src/utils
-SRC_CREATE	:=			create_table.c
+SRC_CREATE	:=			create_table.c create_philos.c
 SRC_ERROR	:=			error.c
 SRC_INPUT	:=			input_check.c get_input.c
 SRC_MAIN	:=			philo.c
-SRC_UTILS	:=			ft_atoi.c ft_isdigit.c ft_strtol.c
+SRC_UTILS	:=			ft_atoi.c ft_isdigit.c ft_strtol.c					\
+						get_current_time_in_mill.c create_mutex.c
+SRC_ROUTINE_FUNKS:=		philo_died.c philo_is_thinking.c print_save.c		\
+						set_rputine_struct.c
+SRC_ROUTINE:=			routine.c
+
 SRCS		:=			$(SRC_CREATE) $(SRC_ERROR) $(SRC_INPUT) $(SRC_MAIN)	\
-						$(SRC_UTILS)
+						$(SRC_UTILS) $(SRC_ROUTINE_FUNKS) $(SRC_ROUTINE)
 
 ###############################################################################
 ###############################################################################
@@ -67,14 +72,14 @@ re: fclean all
 ###############################################################################
 ###############################################################################
 
-YELLOW := "\033[33m"
-RED := "\033[31m"
-GREEN := "\033[32m"
-RESET := "\033[0m" 
-G		=	\e[38;5;118m
-YE		=	\e[38;5;226m
-RE		=	\e[0m
-UP := "\033[A"
-CUT := "\033[K"
+YELLOW		:=		"\033[33m"
+RED			:=			"\033[31m"
+GREEN		:=		"\033[32m"
+RESET		:=		"\033[0m" 
+G			=		\e[38;5;118m
+YE			=		\e[38;5;226m
+RE			=		\e[0m
+UP			:=			"\033[A"
+CUT			:=			"\033[K"
 _SUCCESS	=	$(RE)[$(G)SUCCESS$(RE)]
 _INFO		=	[$(YE)INFO$(RE)]

@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_fork.c                                        :+:      :+:    :+:   */
+/*   philo_died.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/22 09:28:16 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/22 09:33:26 by fgabler          ###   ########.fr       */
+/*   Created: 2023/10/28 13:26:57 by fgabler           #+#    #+#             */
+/*   Updated: 2023/10/28 13:48:47 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	find_next_fork(t_philo *philo)
+int	philo_died(t_philo *philo)
 {
-	int pos_sec;
+	long long	current_time;
 
-	pos_sec = philo->table->nbr_of_philos % philo->id;
-	return (pos_sec);
+	current_time = get_current_time_in_mill() - philo->table->start_of_dinner;
+	if (current_time > philo->table->time_to_die)
+	{
+		philo->table->all_philos_alive = false;
+		return (true);
+	}
+	return (false);
 }

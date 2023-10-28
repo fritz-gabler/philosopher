@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:38:00 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/22 14:06:52 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/28 13:19:59 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	print_save(char *message, t_philo *philo)
 {
-	pthread_mutex_lock(&philo->table->print_save);
-	printf("%s\n", get_time,philo->id, message);
-	pthread_mutex_unlock(&philo->table->print_save);
+	pthread_mutex_lock(&philo->table->protect_message);
+	printf("%llu %d %s\n",
+			(get_current_time_in_mill() - philo->table->start_of_dinner),
+			philo->id, message);
+	pthread_mutex_unlock(&philo->table->protect_message);
 }

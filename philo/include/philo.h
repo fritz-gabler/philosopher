@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/24 19:02:53 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/28 14:24:55 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_table
 	int					all_philos_alive;
 	long long			start_of_dinner;
 	pthread_mutex_t		protect_message;
-	pthread_t			*thread_ids;
+	int					*thread_ids;
 	void				*first_philo;
 }	t_table;
 
@@ -86,6 +86,13 @@ typedef struct s_philo
 	struct s_philo		*next_philo;
 	t_table				*table;
 }	t_philo;
+
+typedef struct s_routine
+{
+	int		think;
+	int		eat;
+	int		sleeps;
+}	t_routine;
 
 /*################################FUNKTIONS##################################*/
 /*###########################################################################*/
@@ -106,9 +113,16 @@ void			create_mutex(pthread_mutex_t *mutex);
 
 //CREATE
 int				create_table(t_table **table, t_input *input);
+int				create_philo(t_philo **philo, t_table *table);
+
+//ROUTINE
+void			*routine(void *arg);
 
 //ROUTINE_FUNCS
 int				find_next_fork(t_philo *philo);
 void			print_save(char *message, t_philo *philo);
+void			set_routine_struct(t_routine *routine);
+int				philo_died(t_philo *philo);
+void			philo_is_thinking(t_philo *philo, t_routine *routine);
 
 #endif

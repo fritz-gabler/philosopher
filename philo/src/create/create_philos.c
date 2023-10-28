@@ -6,30 +6,34 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 22:43:34 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/24 19:04:32 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/28 14:01:52 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	set_philo_content(t_philo *philo, t_table *table, int id);
+static void	set_ptr_to_next_philo(t_philo *philo,
+				unsigned int i, t_philo *save_philo);
 static void	create_thread(t_philo *philo, int i);
-static void	set_ptr_to_next_philo(t_philo *philo, int i, t_philo *save_philo);
+static void	set_philo_content(t_philo *philo, t_table *table, int id);
 
-int	create_philo (t_philo **philo, t_table *table)
+int	create_philo(t_philo **philo, t_table *table)
 {
 	t_philo			*create_philo;
 	t_philo			*save_philo;
-	int				i;
+	unsigned int	i;
 
 	i = 0;
+	create_philo = NULL;
+	save_philo = NULL;
 	while (i < table->nbr_of_philo)
 	{
 		set_philo_content(create_philo, table, i);
 		create_thread(create_philo, i);
-		set_ptr_to_next_philo(create_philo, i ,save_philo);
+		set_ptr_to_next_philo(create_philo, i, save_philo);
 		i++;
 	}
+	*philo = table->first_philo;
 	return (true);
 }
 
@@ -45,11 +49,12 @@ static void	set_philo_content(t_philo *philo, t_table *table, int id)
 
 static void	create_thread(t_philo *philo, int i)
 {
-	philo->table->thread_ids[i] =
-		pthread_create(philo->philo, NULL, &routine, NULL);
+	philo->table->thread_ids[i] = pthread_create(philo->philo,
+			NULL, routine((void *) philo), NULL);
 }
 
-static void	set_ptr_to_next_philo(t_philo *philo, int i, t_philo *save_philo)
+static void	set_ptr_to_next_philo(t_philo *philo,
+				unsigned int i, t_philo *save_philo)
 {
 	if (i == 0)
 	{

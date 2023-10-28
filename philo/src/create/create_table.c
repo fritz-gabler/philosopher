@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:41:40 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/24 17:45:11 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/28 14:31:23 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,13 @@ static void	get_dinner_start_time(t_table *table)
 
 static void allocate_thread_ids(t_table *table)
 {
-	int			i;
+	unsigned int			i;
 
 	i = 0;
 	while (i < table->nbr_of_philo)
 	{
-		table->thread_ids[i] = malloc(sizeof(pthread_t));
+		table->thread_ids[i] =
+			(int *) malloc(sizeof(int) * table->nbr_of_philo);
 		i++;
 	}
 }

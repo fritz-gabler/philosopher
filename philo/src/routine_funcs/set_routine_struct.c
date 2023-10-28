@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   set_routine_struct.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/20 00:38:11 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/28 14:01:20 by fgabler          ###   ########.fr       */
+/*   Created: 2023/10/28 13:23:05 by fgabler           #+#    #+#             */
+/*   Updated: 2023/10/28 13:25:03 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*routine(void *arg)
+void	set_routine_struct(t_routine *routine)
 {
-	t_philo		*philo;
-	t_routine	routine;
-
-	philo = (t_philo *) arg;
-	set_routine_struct(&routine);
-	while (philo->table->all_philos_alive == true)
-	{
-		philo_is_thinking(philo, &routine);
-		//check_for_free_forks();
-		//philo_is_eating();
-		//philo_is_sleeping();
-		//check_how_many_times_eaten();
-		//check_if_philo_died();
-	}
+	routine->think = true;
+	routine->eat = false;
+	routine->sleeps = false;
 }
