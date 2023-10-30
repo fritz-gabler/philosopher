@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_is_thinking.c                                :+:      :+:    :+:   */
+/*   sleep_and_death_check.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
+/*   By: fgabler <fgabler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 12:23:08 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/30 18:25:44 by fgabler          ###   ########.fr       */
+/*   Created: 2023/10/30 14:20:02 by fgabler           #+#    #+#             */
+/*   Updated: 2023/10/30 15:18:36 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_is_thinking(t_philo *philo, t_routine *routine)
+void	sleep_and_death_check(int time_to_sleep, t_philo *philo)
 {
-	if (routine->think == true)
+	long long	start;
+
+	start = get_current_time_in_mill();
+	while ((get_current_time_in_mill() - start) <= ((long long) time_to_sleep))
 	{
-		print_save(THINK, philo);
-		routine->think = false;
+		usleep(50);
+		if (philo_died(philo) == true)
+			return ;
 	}
 }

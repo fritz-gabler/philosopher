@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_is_thinking.c                                :+:      :+:    :+:   */
+/*   philo_is_sleeping.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 12:23:08 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/30 18:25:44 by fgabler          ###   ########.fr       */
+/*   Created: 2023/10/30 16:15:48 by fgabler           #+#    #+#             */
+/*   Updated: 2023/10/30 16:26:16 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_is_thinking(t_philo *philo, t_routine *routine)
+static void	reset_routine(t_routine *routine);
+
+void	philo_is_sleeping(t_philo * philo, t_routine *routine)
 {
-	if (routine->think == true)
+	if (routine->sleeps == true)
 	{
-		print_save(THINK, philo);
-		routine->think = false;
+		sleep_and_death_check(philo->table->time_to_sleep, philo);
+		reset_routine(routine);
 	}
+}
+
+static void	reset_routine(t_routine *routine)
+{
+	routine->sleeps = false;
+	routine->eat = false;
+	routine->think = true;
 }

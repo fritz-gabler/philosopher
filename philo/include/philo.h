@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/28 14:24:55 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/30 17:43:09 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ typedef struct s_table
 	unsigned int		time_to_die;
 	unsigned int		time_to_eat;
 	unsigned int		time_to_sleep;
-	unsigned int		time_each_philo_must_eat;
+	int					time_each_philo_must_eat;
 	int					all_philos_alive;
+	pthread_mutex_t		protect_all_alive;
 	long long			start_of_dinner;
 	pthread_mutex_t		protect_message;
 	int					*thread_ids;
@@ -81,7 +82,7 @@ typedef struct s_philo
 	int					id;
 	int					fork;
 	pthread_mutex_t		protect_fork;
-	long long			started_eating;
+	long long			last_time_eating;
 	int					times_eaten;
 	struct s_philo		*next_philo;
 	t_table				*table;
@@ -110,6 +111,7 @@ long			ft_strtol(const char *str);
 int				ft_atoi(const char *str);
 long long		get_current_time_in_mill();
 void			create_mutex(pthread_mutex_t *mutex);
+void				sleep_and_death_check(int time_to_sleep, t_philo *philo);
 
 //CREATE
 int				create_table(t_table **table, t_input *input);
@@ -124,5 +126,8 @@ void			print_save(char *message, t_philo *philo);
 void			set_routine_struct(t_routine *routine);
 int				philo_died(t_philo *philo);
 void			philo_is_thinking(t_philo *philo, t_routine *routine);
+void			check_for_free_forks(t_philo *philo, t_routine *routine);
+void			philo_is_eating(t_philo *philo, t_routine *routine);
+void			philo_is_sleeping(t_philo * philo, t_routine *routine);
 
 #endif

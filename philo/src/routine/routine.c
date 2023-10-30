@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 00:38:11 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/28 14:01:20 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/30 18:06:45 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	*routine(void *arg)
 	while (philo->table->all_philos_alive == true)
 	{
 		philo_is_thinking(philo, &routine);
-		//check_for_free_forks();
-		//philo_is_eating();
-		//philo_is_sleeping();
+		check_for_free_forks(philo, &routine);
+		philo_is_eating(philo, &routine);
 		//check_how_many_times_eaten();
-		//check_if_philo_died();
+		philo_is_sleeping(philo, &routine);
+		philo_died(philo);
 	}
+	return ((void *) philo);
 }
