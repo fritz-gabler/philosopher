@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:58:36 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/30 18:12:21 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/31 15:48:08 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	check_for_free_forks(t_philo *philo, t_routine *routine)
 	{
 			set_forks_are_in_use(philo);
 			print_save(FORK, philo);
+			print_save(FORK, philo->next_philo);
 			routine->eat = true;
 		}
 		pthread_mutex_unlock(&philo->next_philo->protect_fork);

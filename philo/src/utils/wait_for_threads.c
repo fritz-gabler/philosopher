@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   wait_for_threads.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 15:02:19 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/31 15:41:32 by fgabler          ###   ########.fr       */
+/*   Created: 2023/10/31 15:02:10 by fgabler           #+#    #+#             */
+/*   Updated: 2023/10/31 15:44:42 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main (int ac, char **av)
+void	wait_for_threads(t_philo *philo)
 {
-	t_input		*input;
-	t_philo		*philo;
-	t_table		*table;
+	unsigned int		i;
+	t_philo	*tmp_philo;
 
-	get_input(&input, ac, av);
-	if (is_input_valide(input) == false)
-		return (1);
-	if (create_table(&table, input) == false)
-		return (1);
-	if (create_philo(&philo, table) == false)
-		return (1);
-	wait_for_threads(philo);
-//	clear_structs(philo);
-	return (0);
+	i = 0;
+	tmp_philo = philo;
+	while (i < philo->table->nbr_of_philo)
+	{
+		pthread_join(*tmp_philo->philo, NULL);
+		tmp_philo = tmp_philo->next_philo;
+		i++;
+	}
 }

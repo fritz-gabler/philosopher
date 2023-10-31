@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/30 17:43:09 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/31 15:14:50 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ typedef struct s_table
 	unsigned int		time_to_die;
 	unsigned int		time_to_eat;
 	unsigned int		time_to_sleep;
+	long long			start_of_dinner;
+	pthread_t			*thread_ids;
 	int					time_each_philo_must_eat;
 	int					all_philos_alive;
-	pthread_mutex_t		protect_all_alive;
-	long long			start_of_dinner;
 	pthread_mutex_t		protect_message;
-	int					*thread_ids;
+	pthread_mutex_t		protect_all_alive;
 	void				*first_philo;
 }	t_table;
 
@@ -111,7 +111,8 @@ long			ft_strtol(const char *str);
 int				ft_atoi(const char *str);
 long long		get_current_time_in_mill();
 void			create_mutex(pthread_mutex_t *mutex);
-void				sleep_and_death_check(int time_to_sleep, t_philo *philo);
+void			sleep_and_death_check(int time_to_sleep, t_philo *philo);
+void			wait_for_threads(t_philo *philo);
 
 //CREATE
 int				create_table(t_table **table, t_input *input);

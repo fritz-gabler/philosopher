@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 22:43:34 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/30 18:29:03 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/31 15:42:22 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	set_ptr_to_next_philo(t_philo *philo,
 				unsigned int i, t_philo **save_philo);
-static void	create_thread(t_philo *philo, int i);
+static void	create_thread(t_philo *philo);
 static void	set_philo_content(t_philo *philo, t_table *table, int id);
 
 int	create_philo(t_philo **philo, t_table *table)
@@ -36,7 +36,7 @@ int	create_philo(t_philo **philo, t_table *table)
 	i = 0;
 	while (i < table->nbr_of_philo)
 	{
-		create_thread(create_philo, i);
+		create_thread(create_philo);
 		create_philo = create_philo->next_philo;
 		i++;
 	}
@@ -62,8 +62,11 @@ static void	set_ptr_to_next_philo(t_philo *philo,
 		philo->table->first_philo = (void *) philo;
 		*save_philo = philo;
 	}
-	else if (i == philo->table->nbr_of_philo)
+	else if (i == (philo->table->nbr_of_philo - 1))
+	{
 		philo->next_philo = philo->table->first_philo;
+		(*save_philo)->next_philo = philo;
+	}
 	else
 	{
 		(*save_philo)->next_philo = philo;
@@ -71,10 +74,9 @@ static void	set_ptr_to_next_philo(t_philo *philo,
 	}
 }
 
-static void	create_thread(t_philo *philo, int i)
+static void	create_thread(t_philo *philo)
 {
-	philo->table->thread_ids[i] = pthread_create(philo->philo,
-			NULL, routine((void *) philo), NULL);
-	printf("%d hallo\n", philo->id);
+	philo->philo = (pthread_t *) malloc (sizeof(pthread_t));
+	pthread_create(philo->philo, NULL, &routine, philo);
 }
 
