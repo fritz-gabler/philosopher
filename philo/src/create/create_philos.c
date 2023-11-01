@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 22:43:34 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/31 15:42:22 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/01 18:38:24 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	set_philo_content(t_philo *philo, t_table *table, int id)
 	philo->times_eaten = 0;
 	philo->fork = FORK_IS_FREE;
 	philo->last_time_eating = get_current_time_in_mill();
-	philo->id = id;
+	philo->id = id + 1;
 }
 
 static void	set_ptr_to_next_philo(t_philo *philo,

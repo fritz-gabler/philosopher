@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:41:40 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/31 16:24:50 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/01 17:23:21 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	create_table(t_table **table, t_input *input)
 	set_input_to_table(input, tmp_table);
 	create_mutex(&tmp_table->protect_message);
 	create_mutex(&tmp_table->protect_run_routine);
+	create_mutex(&tmp_table->time);
 	get_dinner_start_time(tmp_table);
 //	if (allocate_thread_ids(tmp_table) == false)
 //		return (free(tmp_table), false);

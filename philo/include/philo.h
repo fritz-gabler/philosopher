@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/01 17:02:58 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/01 17:23:09 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_table
 	int					run_routine;
 	pthread_mutex_t		protect_run_routine;
 	pthread_mutex_t		protect_message;
+	pthread_mutex_t		time;
 	void				*first_philo;
 }	t_table;
 
