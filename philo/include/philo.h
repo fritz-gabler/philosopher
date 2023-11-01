@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/01 11:18:15 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/01 17:02:58 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define ARG_IS_NOT_NUMER			22445
 # define NOT_ENAUGE_PHILOS			22446
 # define FORK_IN_USE				22447
-# define FORK_IS_FREE				22447
+# define FORK_IS_FREE				22448
 # define THINK						"is thinking"
 # define FORK						"has taken a fork"
 # define EAT						"is eating"
