@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 00:38:11 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/30 18:06:45 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/01 11:18:39 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	*routine(void *arg)
 
 	philo = (t_philo *) arg;
 	set_routine_struct(&routine);
-	while (philo->table->all_philos_alive == true)
+
+	while (philo->table->run_routine == true)
 	{
 		philo_is_thinking(philo, &routine);
 		check_for_free_forks(philo, &routine);
@@ -27,6 +28,7 @@ void	*routine(void *arg)
 		//check_how_many_times_eaten();
 		philo_is_sleeping(philo, &routine);
 		philo_died(philo);
+		usleep(100);
 	}
 	return ((void *) philo);
 }

@@ -6,13 +6,13 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:41:40 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/31 15:43:49 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/10/31 16:24:50 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void		all_philos_alive(t_table *table);
+static void		set_run_routine(t_table *table);
 static void		set_input_to_table(t_input *input, t_table *table);
 static void		get_dinner_start_time(t_table *table);
 //static int		allocate_thread_ids(t_table *table);
@@ -24,10 +24,10 @@ int	create_table(t_table **table, t_input *input)
 	tmp_table = malloc(sizeof(t_table));
 	if (tmp_table == NULL)
 		return (false);
-	all_philos_alive(tmp_table);
+	set_run_routine(tmp_table);
 	set_input_to_table(input, tmp_table);
 	create_mutex(&tmp_table->protect_message);
-	create_mutex(&tmp_table->protect_all_alive);
+	create_mutex(&tmp_table->protect_run_routine);
 	get_dinner_start_time(tmp_table);
 //	if (allocate_thread_ids(tmp_table) == false)
 //		return (free(tmp_table), false);
@@ -63,7 +63,7 @@ static int	allocate_thread_ids(t_table *table)
 }
 */
 
-static void	all_philos_alive(t_table *table)
+static void	set_run_routine(t_table *table)
 {
-	table->all_philos_alive = true;
+	table->run_routine = true;
 }

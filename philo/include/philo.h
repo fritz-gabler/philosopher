@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/31 15:14:50 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/01 11:18:15 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ typedef struct s_table
 	long long			start_of_dinner;
 	pthread_t			*thread_ids;
 	int					time_each_philo_must_eat;
-	int					all_philos_alive;
+	int					run_routine;
+	pthread_mutex_t		protect_run_routine;
 	pthread_mutex_t		protect_message;
-	pthread_mutex_t		protect_all_alive;
 	void				*first_philo;
 }	t_table;
 
@@ -90,9 +90,10 @@ typedef struct s_philo
 
 typedef struct s_routine
 {
-	int		think;
-	int		eat;
-	int		sleeps;
+	int		time_to_think;
+	int		time_to_eat;
+	int		time_to_sleep;
+	int		time_to_look_for_fork;
 }	t_routine;
 
 /*################################FUNKTIONS##################################*/

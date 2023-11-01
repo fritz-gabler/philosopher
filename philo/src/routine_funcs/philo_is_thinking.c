@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:23:08 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/30 18:25:44 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/01 11:10:22 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	philo_is_thinking(t_philo *philo, t_routine *routine)
 {
-	if (routine->think == true)
+	if (routine->time_to_think == true)
 	{
 		print_save(THINK, philo);
-		routine->think = false;
+		routine->time_to_think = false;
+		routine->time_to_look_for_fork = true;
 	}
 }
