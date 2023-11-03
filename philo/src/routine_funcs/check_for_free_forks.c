@@ -6,22 +6,20 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:58:36 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/01 17:37:39 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/03 17:35:49 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static void	set_forks_are_in_use(t_philo *philo);
+static int	left_and_right_fork_is_free(t_philo *philo);
 
 void	check_for_free_forks(t_philo *philo, t_routine *routine)
 {
 	if (routine->time_to_look_for_fork == true)
 	{
-		pthread_mutex_lock(&philo->protect_fork);
-		pthread_mutex_lock(&philo->next_philo->protect_fork);
-		if (philo->fork == FORK_IS_FREE
-				&& philo->next_philo->fork == FORK_IS_FREE)
+		if (left_and_right_fork_is_free(philo) == true)
 		{
 			set_forks_are_in_use(philo);
 			print_save(FORK, philo);
@@ -29,9 +27,23 @@ void	check_for_free_forks(t_philo *philo, t_routine *routine)
 			routine->time_to_look_for_fork = false;
 			routine->time_to_eat = true;
 		}
+	}
+}
+
+
+static int	left_and_right_fork_is_free(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->protect_fork);
+	pthread_mutex_lock(&philo->next_philo->protect_fork);
+	if (philo->fork == FORK_IS_FREE && philo->next_philo->fork == FORK_IS_FREE)
+	{
 		pthread_mutex_unlock(&philo->next_philo->protect_fork);
 		pthread_mutex_unlock(&philo->protect_fork);
+		return (true);
 	}
+	pthread_mutex_unlock(&philo->next_philo->protect_fork);
+	pthread_mutex_unlock(&philo->protect_fork);
+	return (false);
 }
 
 static void	set_forks_are_in_use(t_philo *philo)

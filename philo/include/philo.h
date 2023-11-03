@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/01 17:23:09 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/03 17:57:37 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,24 @@ typedef struct s_table
 	unsigned int		time_to_eat;
 	unsigned int		time_to_sleep;
 	long long			start_of_dinner;
-	pthread_t			*thread_ids;
 	int					time_each_philo_must_eat;
 	int					run_routine;
+	int					dinner_served;
+	pthread_mutex_t		protect_dinner_served;
 	pthread_mutex_t		protect_run_routine;
 	pthread_mutex_t		protect_message;
-	pthread_mutex_t		time;
 	void				*first_philo;
 }	t_table;
 
 typedef struct s_philo
 {
-	pthread_t			*philo;
+	pthread_t			philo;
 	int					id;
 	int					fork;
 	pthread_mutex_t		protect_fork;
 	long long			last_time_eating;
 	int					times_eaten;
+	pthread_mutex_t		protect_times_eaten;
 	struct s_philo		*next_philo;
 	t_table				*table;
 }	t_philo;
@@ -112,9 +113,9 @@ int				ft_isdigit(int c);
 long			ft_strtol(const char *str);
 int				ft_atoi(const char *str);
 long long		get_current_time_in_mill();
-void			create_mutex(pthread_mutex_t *mutex);
 void			sleep_and_death_check(int time_to_sleep, t_philo *philo);
 void			wait_for_threads(t_philo *philo);
+void			ft_bzero(void *s, size_t n);
 
 //CREATE
 int				create_table(t_table **table, t_input *input);
@@ -132,5 +133,6 @@ void			philo_is_thinking(t_philo *philo, t_routine *routine);
 void			check_for_free_forks(t_philo *philo, t_routine *routine);
 void			philo_is_eating(t_philo *philo, t_routine *routine);
 void			philo_is_sleeping(t_philo * philo, t_routine *routine);
+int				run_routine_check(t_philo *philo);
 
 #endif

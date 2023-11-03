@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_is_thinking.c                                :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 12:23:08 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/03 09:31:43 by fgabler          ###   ########.fr       */
+/*   Created: 2023/11/03 12:54:14 by fgabler           #+#    #+#             */
+/*   Updated: 2023/11/03 12:54:27 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	reset_routine(t_routine *routine);
-
-void	philo_is_thinking(t_philo *philo, t_routine *routine)
+void	ft_bzero(void *s, size_t n)
 {
-	if (routine->time_to_think == true)
+	char	*f;
+
+	f = (char *)s;
+	while (n--)
 	{
-		print_save(THINK, philo);
-		reset_routine(routine);
+		*f++ = '\0';
 	}
-}
-
-static void	reset_routine(t_routine *routine)
-{
-	routine->time_to_look_for_fork = true;
-	routine->time_to_eat = false;
-	routine->time_to_sleep = false;
-	routine->time_to_think = false;
 }

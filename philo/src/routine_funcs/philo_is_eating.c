@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:18:17 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/01 19:50:56 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/03 18:27:42 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	philo_is_eating(t_philo *philo, t_routine *routine)
 	if (routine->time_to_eat == true)
 	{
 		print_save(EAT, philo);
-		pthread_mutex_lock(&philo->table->time);
 		sleep_and_death_check(philo->table->time_to_eat, philo);
+		//pthread_mutex_lock(&philo->);
 		philo->last_time_eating = get_current_time_in_mill();
-		pthread_mutex_unlock(&philo->table->time);
+		//pthread_mutex_unlock(&philo->table->time);
 		set_fork_to_available(philo);
 		routine->time_to_eat = false;
 		routine->time_to_sleep = true;

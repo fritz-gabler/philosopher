@@ -20,11 +20,13 @@ SRC_ERROR	:=			error.c
 SRC_INPUT	:=			input_check.c get_input.c
 SRC_MAIN	:=			philo.c
 SRC_UTILS	:=			ft_atoi.c ft_isdigit.c ft_strtol.c					\
-						get_current_time_in_mill.c create_mutex.c			\
-						sleep_and_death_check.c wait_for_threads.c
+						get_current_time_in_mill.c							\
+						sleep_and_death_check.c wait_for_threads.c			\
+						ft_bzero.c
 SRC_ROUTINE_FUNKS:=		philo_died.c philo_is_thinking.c print_save.c		\
 						set_routine_struct.c check_for_free_forks.c			\
-						philo_is_eating.c philo_is_sleeping.c
+						philo_is_eating.c philo_is_sleeping.c				\
+						run_routine_check.c
 SRC_ROUTINE:=			routine.c
 
 SRCS		:=			$(SRC_CREATE) $(SRC_ERROR) $(SRC_INPUT) $(SRC_MAIN)	\

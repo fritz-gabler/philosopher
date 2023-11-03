@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 22:43:34 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/01 18:38:24 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/03 16:56:31 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	create_philo(t_philo **philo, t_table *table)
 
 static void	set_philo_content(t_philo *philo, t_table *table, int id)
 {
-	create_mutex(&philo->protect_fork);
+	pthread_mutex_init(&philo->protect_fork, NULL);
+	pthread_mutex_init(&philo->protect_times_eaten, NULL);
 	philo->table = table;
 	philo->times_eaten = 0;
 	philo->fork = FORK_IS_FREE;
@@ -76,7 +77,5 @@ static void	set_ptr_to_next_philo(t_philo *philo,
 
 static void	create_thread(t_philo *philo)
 {
-	philo->philo = (pthread_t *) malloc (sizeof(pthread_t));
-	pthread_create(philo->philo, NULL, &routine, philo);
+	pthread_create(&philo->philo, NULL, &routine, philo);
 }
-
