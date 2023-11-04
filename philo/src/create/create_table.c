@@ -6,14 +6,14 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:41:40 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/04 13:25:13 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/04 17:34:30 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static void		set_run_routine(t_table *table);
-static void		create_table_mutex(t_table *table);
+static int		create_table_mutex(t_table *table);
 static void		set_input_to_table(t_input *input, t_table *table);
 static void		get_dinner_start_time(t_table *table);
 
@@ -23,12 +23,14 @@ int	create_table(t_table **table, t_input *input)
 
 	tmp_table = malloc(sizeof(t_table));
 	if (tmp_table == NULL)
-		return (false);
+		return (free(input), false);
 	set_run_routine(tmp_table);
 	set_input_to_table(input, tmp_table);
-	create_table_mutex(tmp_table);
+	if (create_table_mutex(tmp_table) == false)
+		return (free(tmp_table), free(input), false);
 	get_dinner_start_time(tmp_table);
 	*table = tmp_table;
+	free(input);
 	return (true);
 }
 
@@ -49,11 +51,15 @@ static void	get_dinner_start_time(t_table *table)
 	table->start_of_dinner = get_current_time_in_mill();
 }
 
-static void	create_table_mutex(t_table *table)
+static int	create_table_mutex(t_table *table)
 {
-	pthread_mutex_init(&table->protect_message, NULL);
-	pthread_mutex_init(&table->protect_run_routine, NULL);
-	pthread_mutex_init(&table->protect_dinner_served, NULL);
+	if (pthread_mutex_init(&table->protect_message, NULL) != 0)
+		return (false);
+	if (pthread_mutex_init(&table->protect_run_routine, NULL) != 0)
+		return (false);
+	if (pthread_mutex_init(&table->protect_dinner_served, NULL) != 0)
+		return (false);
+	return (true);
 }
 
 static void	set_run_routine(t_table *table)

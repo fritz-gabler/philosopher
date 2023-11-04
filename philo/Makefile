@@ -14,7 +14,9 @@ CFLAGS		?=			-Wall -Werror -Wextra -g
 ###############################################################################
 
 VPATH		:=			src/create src/error src/input src/main src/utils	\
-						src/routine_funcs src/routine
+						src/routine_funcs src/routine src/clean
+SRC_CLEAR	:=			clear_structs.c wait_for_threads.c					\
+						destroy_all_mutex.c
 SRC_CREATE	:=			create_table.c create_philos.c						\
 						create_philo_struct.c create_philo_threads.c
 SRC_ERROR	:=			error.c
@@ -22,8 +24,7 @@ SRC_INPUT	:=			input_check.c get_input.c
 SRC_MAIN	:=			philo.c
 SRC_UTILS	:=			ft_atoi.c ft_isdigit.c ft_strtol.c					\
 						get_current_time_in_mill.c							\
-						sleep_and_death_check.c wait_for_threads.c			\
-						ft_bzero.c
+						sleep_and_death_check.c ft_bzero.c
 SRC_ROUTINE_FUNKS:=		philo_died.c philo_is_thinking.c print_save.c		\
 						set_routine_struct.c check_for_free_forks.c			\
 						philo_is_eating.c philo_is_sleeping.c				\
@@ -31,7 +32,8 @@ SRC_ROUTINE_FUNKS:=		philo_died.c philo_is_thinking.c print_save.c		\
 SRC_ROUTINE:=			routine.c
 
 SRCS		:=			$(SRC_CREATE) $(SRC_ERROR) $(SRC_INPUT) $(SRC_MAIN)	\
-						$(SRC_UTILS) $(SRC_ROUTINE_FUNKS) $(SRC_ROUTINE)
+						$(SRC_UTILS) $(SRC_ROUTINE_FUNKS) $(SRC_ROUTINE)	\
+						$(SRC_CLEAR)
 
 ###############################################################################
 ###############################################################################

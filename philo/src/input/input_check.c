@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:31:51 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/17 22:35:25 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/04 17:29:14 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_input_valide (t_input *input)
 	if (bigger_max_int(input) == true)
 		return (error(ARG_BIGGER_MAX_INT), free(input), false);
 	if (zero_or_less_philo(input) == true)
-		return (error(NOT_ENAUGE_PHILOS), free(input), false);
+		return (error(NOT_ENOUTH_PHILOS), free(input), false);
 	return (true);
 }
 

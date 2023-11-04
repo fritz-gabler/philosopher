@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:19 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/04 13:25:31 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/04 18:45:04 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	main (int ac, char **av)
 		return (1);
 	if (create_philo(&philo, table) == false)
 		return (1);
-	wait_for_threads(philo);
-	//destroy_mutex();
-//	clear_structs(philo);
+	wait_for_threads(philo, table->nbr_of_philo);
+	//destroy_all_mutex(philo, table->nbr_of_philo);
+	clear_structs(&philo, &table, table->nbr_of_philo);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/04 14:11:53 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/04 18:37:47 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@
 # define WHITE						"\x01\033[0m\x02"
 # define ORANGE						"\x01\033[38;2;255;165;0m\x02"
 # define RESET						"\033[0m"
+# define ALLOCATION_FAIL			22442
 # define WRONG_NUMBER_OF_ARGS		22443
 # define ARG_BIGGER_MAX_INT			22444
 # define ARG_IS_NOT_NUMER			22445
-# define NOT_ENAUGE_PHILOS			22446
+# define NOT_ENOUTH_PHILOS			22446
 # define FORK_IN_USE				22447
 # define FORK_IS_FREE				22448
 # define THINK						"is thinking"
@@ -63,6 +64,7 @@ typedef struct s_input
 
 typedef struct s_table
 {
+	int					wait_for_all_threads_to_be_created;
 	unsigned int		nbr_of_philo;
 	unsigned int		time_to_die;
 	unsigned int		time_to_eat;
@@ -114,14 +116,13 @@ long			ft_strtol(const char *str);
 int				ft_atoi(const char *str);
 long long		get_current_time_in_mill();
 void			sleep_and_death_check(int time_to_sleep, t_philo *philo);
-void			wait_for_threads(t_philo *philo);
 void			ft_bzero(void *s, size_t n);
 
 //CREATE
 int				create_table(t_table **table, t_input *input);
 int				create_philo(t_philo **philo, t_table *table);
-void			create_philo_struct(t_philo **philo, t_table *table);
-void			create_philo_threads(t_philo *philo);
+int				create_philo_struct(t_philo **philo, t_table *table);
+int				create_philo_threads(t_philo *philo);
 
 //ROUTINE
 void			*routine(void *arg);
@@ -138,4 +139,10 @@ void			philo_is_sleeping(t_philo * philo, t_routine *routine);
 int				run_routine_check(t_philo *philo);
 void			check_times_eaten(t_philo *philo);
 
+//CLEAR
+void			clear_structs(t_philo **philo, t_table **table, int nbr_of_philo);
+void			wait_for_threads(t_philo *philo, int nbr_of_threads);
+void			destroy_all_mutex(t_philo *philo, int nbr_of_threads);
+
 #endif
+
