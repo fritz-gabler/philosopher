@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/03 19:10:35 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/04 14:11:53 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ void			ft_bzero(void *s, size_t n);
 //CREATE
 int				create_table(t_table **table, t_input *input);
 int				create_philo(t_philo **philo, t_table *table);
+void			create_philo_struct(t_philo **philo, t_table *table);
+void			create_philo_threads(t_philo *philo);
 
 //ROUTINE
 void			*routine(void *arg);

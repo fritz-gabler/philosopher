@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_save.c                                       :+:      :+:    :+:   */
+/*   create_philo_threads.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/22 13:38:00 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/04 14:25:17 by fgabler          ###   ########.fr       */
+/*   Created: 2023/11/04 13:12:45 by fgabler           #+#    #+#             */
+/*   Updated: 2023/11/04 14:12:13 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static long long	get_time(t_philo *philo);
-
-void	print_save(char *message, t_philo *philo)
+void	create_philo_threads(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->table->protect_message);
-	if (run_routine_check(philo) == true)
-		printf("%llu %d %s\n", get_time(philo), philo->id, message);
-	pthread_mutex_unlock(&philo->table->protect_message);
+	unsigned int	i;
+	t_philo			*tmp_philo;
+
+	i = 0;
+	tmp_philo = philo;
+	while (i < philo->table->nbr_of_philo)
+	{
+		pthread_create(&tmp_philo->philo, NULL, &routine, tmp_philo);
+		tmp_philo = tmp_philo->next_philo;
+		i++;
+	}
 }
 
-static long long	get_time(t_philo *philo)
-{
-	return (get_current_time_in_mill() - philo->table->start_of_dinner);
-}
