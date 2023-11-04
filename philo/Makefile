@@ -26,7 +26,7 @@ SRC_UTILS	:=			ft_atoi.c ft_isdigit.c ft_strtol.c					\
 SRC_ROUTINE_FUNKS:=		philo_died.c philo_is_thinking.c print_save.c		\
 						set_routine_struct.c check_for_free_forks.c			\
 						philo_is_eating.c philo_is_sleeping.c				\
-						run_routine_check.c
+						run_routine_check.c check_times_eaten.c
 SRC_ROUTINE:=			routine.c
 
 SRCS		:=			$(SRC_CREATE) $(SRC_ERROR) $(SRC_INPUT) $(SRC_MAIN)	\

@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:38:00 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/03 18:28:01 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/03 18:46:24 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static long long	get_time(t_philo *philo);
 
 void	print_save(char *message, t_philo *philo)
 {
-	if (run_routine_check(philo) == true)
-	{
-		pthread_mutex_lock(&philo->table->protect_message);
-		printf("%llu %d %s\n", get_time(philo), philo->id, message);
-		pthread_mutex_unlock(&philo->table->protect_message);
-	}
+	//if (run_routine_check(philo) == true)
+	//{
+	pthread_mutex_lock(&philo->table->protect_message);
+	printf("%llu %d %s\n", get_time(philo), philo->id, message);
+	pthread_mutex_unlock(&philo->table->protect_message);
+	//}
 }
 
 static long long	get_time(t_philo *philo)

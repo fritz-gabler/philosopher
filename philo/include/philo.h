@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/03 17:57:37 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/03 19:10:35 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,6 @@ void			check_for_free_forks(t_philo *philo, t_routine *routine);
 void			philo_is_eating(t_philo *philo, t_routine *routine);
 void			philo_is_sleeping(t_philo * philo, t_routine *routine);
 int				run_routine_check(t_philo *philo);
+void			check_times_eaten(t_philo *philo);
 
 #endif
