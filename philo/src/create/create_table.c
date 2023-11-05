@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:41:40 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 10:24:30 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/05 15:43:45 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ static int	create_table_mutex(t_table *table)
 	if (pthread_mutex_init(&table->protect_run_routine, NULL) != 0)
 		return (false);
 	if (pthread_mutex_init(&table->protect_dinner_served, NULL) != 0)
+		return (false);
+	if (pthread_mutex_init(&table->protect_creation_failed, NULL) != 0)
+		return (false);
+	if (pthread_mutex_init(&table->protect_all_threads_created, NULL) != 0)
 		return (false);
 	return (true);
 }

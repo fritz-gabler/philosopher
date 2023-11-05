@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:18:17 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 14:41:50 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/05 17:43:49 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	philo_is_eating(t_philo *philo, t_routine *routine)
 {
 	if (routine->time_to_eat == true)
 	{
+
 		print_save(EAT, philo);
 		sleep_and_death_check(philo->table->time_to_eat, philo);
 		check_times_eaten(philo);

@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:58:36 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 14:40:34 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/05 18:54:17 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,21 @@ void	check_for_free_forks(t_philo *philo, t_routine *routine)
 
 static int	left_and_right_fork_is_free(t_philo *philo)
 {
+	int	fork_left;
+	int	fork_right;
+
+	fork_left = FORK_IN_USE;
+	fork_right = FORK_IN_USE;
 	pthread_mutex_lock(&philo->protect_fork);
-	pthread_mutex_lock(&philo->next_philo->protect_fork);
-	if (philo->fork == FORK_IS_FREE && philo->next_philo->fork == FORK_IS_FREE)
-	{
-		pthread_mutex_unlock(&philo->next_philo->protect_fork);
-		pthread_mutex_unlock(&philo->protect_fork);
-		return (true);
-	}
-	pthread_mutex_unlock(&philo->next_philo->protect_fork);
+	if (philo->fork == FORK_IS_FREE)
+		fork_left = FORK_IS_FREE;
 	pthread_mutex_unlock(&philo->protect_fork);
+	pthread_mutex_lock(&philo->next_philo->protect_fork);
+	if (philo->next_philo->fork == FORK_IS_FREE)
+		fork_right = FORK_IS_FREE;
+	pthread_mutex_unlock(&philo->next_philo->protect_fork);
+	if (fork_left == FORK_IS_FREE && fork_right == FORK_IS_FREE)
+		return (true);
 	return (false);
 }
 

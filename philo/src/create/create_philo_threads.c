@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 13:12:45 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 11:06:13 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/05 16:14:37 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int	create_philo_threads(t_philo *philo)
 		tmp_philo = tmp_philo->next_philo;
 		i++;
 	}
-	philo->table->all_threads_created = true;
+	set_all_threads_created(philo);
 	return (true);
 }
 
 static void	clean_failed_thread(t_philo *philo, int nbr_of_threads)
 {
-	philo->table->threads_creation_failed = true;
+	set_creation_failed(philo);
 	wait_for_threads(philo, nbr_of_threads);
 	destroy_all_mutex(philo, nbr_of_threads);
 	clear_structs(&philo, &philo->table, nbr_of_threads);
@@ -49,7 +49,7 @@ static int	one_philo(t_philo *philo)
 	{
 		if (pthread_create(&philo->philo, NULL, &routine, philo) != 0)
 			return (clean_failed_thread(philo, 1), true);
-		philo->table->all_threads_created = true;
+		set_all_threads_created(philo);
 		return (true);
 	}
 	return (false);

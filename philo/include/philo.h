@@ -67,7 +67,9 @@ typedef struct s_table
 {
 	int					single_meal;
 	int					all_threads_created;
+	pthread_mutex_t		protect_all_threads_created;
 	int					threads_creation_failed;
+	pthread_mutex_t		protect_creation_failed;
 	unsigned int		nbr_of_philo;
 	unsigned int		time_to_die;
 	unsigned int		time_to_eat;
@@ -143,6 +145,10 @@ int				run_routine_check(t_philo *philo);
 void			check_times_eaten(t_philo *philo);
 int				all_threads_created(t_philo *philo);
 int				single_meal(t_philo *philo);
+void			set_all_threads_created(t_philo *philo);
+int				threads_creation_failed(t_philo *philo);
+void			set_creation_failed(t_philo *philo);
+int				check_all_threads_created(t_philo *philo);
 
 //CLEAR
 void			clear_structs(t_philo **philo, t_table **table, int nbr_of_philo);

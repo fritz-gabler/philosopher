@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 18:00:40 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/04 10:56:21 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/05 18:12:41 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	check_times_eaten(t_philo *philo)
 
 static void	note_philo_ate(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->protect_times_eaten);
 	philo->times_eaten++;
+	pthread_mutex_unlock(&philo->protect_times_eaten);
 }
 static void	tell_table_a_meal_got_served(t_philo *philo)
 {
