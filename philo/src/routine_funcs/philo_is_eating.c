@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:18:17 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/04 11:35:57 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/05 14:41:50 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ void	philo_is_eating(t_philo *philo, t_routine *routine)
 static void	set_fork_to_available(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->protect_fork);
+	pthread_mutex_lock(&philo->next_philo->protect_fork);
 	philo->fork = FORK_IS_FREE;
 	philo->next_philo->fork = FORK_IS_FREE;
+	philo->fork = FORK_IS_FREE;
+	pthread_mutex_unlock(&philo->next_philo->protect_fork);
 	pthread_mutex_unlock(&philo->protect_fork);
 }
 

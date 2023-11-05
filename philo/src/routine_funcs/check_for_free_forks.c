@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:58:36 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 11:55:47 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/05 14:40:34 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ static int	left_and_right_fork_is_free(t_philo *philo)
 
 static void	set_forks_are_in_use(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->protect_fork);
+	pthread_mutex_lock(&philo->next_philo->protect_fork);
 	philo->fork = FORK_IN_USE;
 	philo->next_philo->fork = FORK_IN_USE;
+	pthread_mutex_unlock(&philo->next_philo->protect_fork);
+	pthread_mutex_unlock(&philo->protect_fork);
 }
