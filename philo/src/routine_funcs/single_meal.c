@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait_for_threads.c                                 :+:      :+:    :+:   */
+/*   single_meal.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 15:02:10 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 11:22:34 by fgabler          ###   ########.fr       */
+/*   Created: 2023/11/05 10:33:39 by fgabler           #+#    #+#             */
+/*   Updated: 2023/11/05 10:40:48 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	wait_for_threads(t_philo *philo, int nbr_of_threads)
-{
-	int		i;
-	t_philo	*tmp_philo;
+static void	wait_till_philo_died(t_philo *philo);
 
-	i = 0;
-	tmp_philo = philo;
-	while (i <= nbr_of_threads && tmp_philo)
+int	single_meal(t_philo *philo)
+{
+	if (philo->table->single_meal == true)
 	{
-		pthread_join(tmp_philo->philo, NULL);
-		tmp_philo = tmp_philo->next_philo;
-		i++;
+		wait_till_philo_died(philo);
+		return (true);
 	}
+	return (false);
+}
+
+static void	wait_till_philo_died(t_philo *philo)
+{
+	while(philo_died( philo) == false)
+		usleep(1000);
+	return ;
 }

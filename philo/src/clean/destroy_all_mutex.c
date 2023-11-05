@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:55:18 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/04 18:22:22 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/05 11:23:23 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	destroy_all_mutex(t_philo *philo, int nbr_of_threads)
 
 	i = 0;
 	tmp_philo = philo;
-	while (i <= nbr_of_threads)
+	while (i <= nbr_of_threads && tmp_philo)
 	{
 		
 		pthread_mutex_destroy(&tmp_philo->protect_fork);

@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/04 18:37:47 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/05 09:28:17 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +65,9 @@ typedef struct s_input
 
 typedef struct s_table
 {
-	int					wait_for_all_threads_to_be_created;
+	int					single_meal;
+	int					all_threads_created;
+	int					threads_creation_failed;
 	unsigned int		nbr_of_philo;
 	unsigned int		time_to_die;
 	unsigned int		time_to_eat;
@@ -138,6 +141,8 @@ void			philo_is_eating(t_philo *philo, t_routine *routine);
 void			philo_is_sleeping(t_philo * philo, t_routine *routine);
 int				run_routine_check(t_philo *philo);
 void			check_times_eaten(t_philo *philo);
+int				all_threads_created(t_philo *philo);
+int				single_meal(t_philo *philo);
 
 //CLEAR
 void			clear_structs(t_philo **philo, t_table **table, int nbr_of_philo);

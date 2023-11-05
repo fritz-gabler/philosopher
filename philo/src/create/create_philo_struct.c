@@ -6,12 +6,13 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 12:08:05 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/04 18:39:01 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/05 11:18:43 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static int	set_one_philo(t_philo **philo, t_table *table);
 static void	set_philo_content(t_philo *philo, t_table *table, int id);
 static void	set_ptr_to_next_philo(t_philo *philo,
 		unsigned int i, t_philo **save_philo);
@@ -23,6 +24,8 @@ int	create_philo_struct(t_philo **philo, t_table *table)
 	unsigned int	i;
 
 	i = 0;
+	if (set_one_philo(philo, table) == true)
+		return (true);
 	while (i < table->nbr_of_philo)
 	{
 		create_philo = (t_philo *) malloc(sizeof(t_philo));
@@ -65,4 +68,17 @@ static void	set_ptr_to_next_philo(t_philo *philo,
 		(*save_philo)->next_philo = philo;
 		*save_philo = philo;
 	}
+}
+
+static int	set_one_philo(t_philo **philo, t_table *table)
+{
+	if (table->single_meal == true)
+	{
+		*philo = (t_philo *) malloc(sizeof(t_philo));
+		if (philo == NULL)
+			return (clear_structs(philo, &table, 0), false);
+		set_philo_content(*philo, table, 0);
+		(*philo)->next_philo = NULL;
+	}
+	return (false);
 }

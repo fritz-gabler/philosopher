@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait_for_threads.c                                 :+:      :+:    :+:   */
+/*   all_threas_created.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 15:02:10 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 11:22:34 by fgabler          ###   ########.fr       */
+/*   Created: 2023/11/05 09:24:13 by fgabler           #+#    #+#             */
+/*   Updated: 2023/11/05 09:33:57 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	wait_for_threads(t_philo *philo, int nbr_of_threads)
+int	all_threads_created(t_philo *philo)
 {
-	int		i;
-	t_philo	*tmp_philo;
-
-	i = 0;
-	tmp_philo = philo;
-	while (i <= nbr_of_threads && tmp_philo)
+	while(philo->table->all_threads_created == false)
 	{
-		pthread_join(tmp_philo->philo, NULL);
-		tmp_philo = tmp_philo->next_philo;
-		i++;
+		if (philo->table->threads_creation_failed == true)
+			return (false);
+		usleep(1500);
 	}
+	return (true);
 }
