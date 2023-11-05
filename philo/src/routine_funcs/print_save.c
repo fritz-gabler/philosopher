@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:38:00 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/04 14:25:17 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/05 11:53:02 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	print_save(char *message, t_philo *philo)
 	pthread_mutex_lock(&philo->table->protect_message);
 	if (run_routine_check(philo) == true)
 		printf("%llu %d %s\n", get_time(philo), philo->id, message);
+	//printf("before\n");
+	//printf("after\n");
 	pthread_mutex_unlock(&philo->table->protect_message);
 }
 

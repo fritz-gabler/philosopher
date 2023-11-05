@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 15:02:10 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 11:22:34 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/05 12:54:15 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	wait_for_threads(t_philo *philo, int nbr_of_threads)
 
 	i = 0;
 	tmp_philo = philo;
-	while (i <= nbr_of_threads && tmp_philo)
+	while (i < nbr_of_threads && tmp_philo)
 	{
 		pthread_join(tmp_philo->philo, NULL);
 		tmp_philo = tmp_philo->next_philo;
