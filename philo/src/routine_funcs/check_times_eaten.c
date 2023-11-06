@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 18:00:40 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 18:12:41 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 09:04:55 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ static void	tell_table_a_meal_got_served(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->protect_times_eaten);
 	if (philo->times_eaten == philo->table->time_each_philo_must_eat)
+	{
 		philo->table->dinner_served++;
+	}
 	pthread_mutex_unlock(&philo->protect_times_eaten);
 }
 
@@ -48,7 +50,7 @@ static void	check_if_every_philo_ate_enough(t_philo *philo)
 	pthread_mutex_lock(&philo->table->protect_dinner_served);
 	times_dinner_served = philo->table->dinner_served;
 	pthread_mutex_unlock(&philo->table->protect_dinner_served);
-	if (times_dinner_served == philo->table->time_each_philo_must_eat)
+	if ((long long) times_dinner_served == philo->table->nbr_of_philo)
 		stop_routine(philo);
 }
 
