@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 12:23:08 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/03 09:31:43 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 09:44:27 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	philo_is_thinking(t_philo *philo, t_routine *routine)
 	{
 		print_save(THINK, philo);
 		reset_routine(routine);
+		usleep(4000);
 	}
 }
 
