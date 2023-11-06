@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 15:35:56 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/06 13:57:38 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 16:47:12 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	clear_philos(t_philo **philo, int nbr_of_philos)
 		*philo = tmp_philo;
 		i++;
 	}
-	//philo = NULL;
+	philo = NULL;
 }
 
 static void	clear_table(t_table **table)

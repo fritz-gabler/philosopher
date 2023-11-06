@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 09:24:13 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/06 15:09:47 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 16:48:25 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	all_threads_created(t_philo *philo)
 		usleep(50);
 	}
 	wait_for_odd(philo);
-	(void)wait_for_odd;
 	return (true);
 }
 
@@ -40,11 +39,10 @@ static void	wait_for_odd(t_philo *philo)
 		pthread_mutex_unlock(&philo->table->protect_all_add_started);
 		return ;
 	}
-	while (all_add_philos_started( philo) == false)
+	while (all_add_philos_started(philo) == false)
 	{
 		usleep(50);
 	}
-
 }
 
 static int	all_add_philos_started(t_philo *philo)
@@ -57,7 +55,6 @@ static int	all_add_philos_started(t_philo *philo)
 	}
 	pthread_mutex_unlock(&philo->table->protect_all_add_started);
 	return (false);
-	
 }
 
 static int	odd_philo_nbr(t_philo *philo)
@@ -65,4 +62,3 @@ static int	odd_philo_nbr(t_philo *philo)
 	return ((int)(philo->table->nbr_of_philo / 2)
 			+ philo->table->nbr_of_philo % 2);
 }
-
