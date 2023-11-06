@@ -8,7 +8,7 @@ NAME = philo
 
 CC			:=			cc
 HEADERS 	:=			-I./include
-CFLAGS		?=			-Wall -Werror -Wextra -g
+CFLAGS		?=			-Wall -Werror -Wextra -g -fsanitize=address
 
 ###############################################################################
 ###############################################################################

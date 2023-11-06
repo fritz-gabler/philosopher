@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/06 13:18:12 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 15:25:12 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 /*###############################DEFINITION##################################*/
 /*###########################################################################*/
-
 # define RED						"\x01\033[1;31m\x02"
 # define DARK_GREEN					"\x01\033[1;32m\x02"
 # define GRASS_GREEN				"\x01\033[38;2;0;255;0m\x02"
@@ -40,6 +39,7 @@
 # define EAT						"is eating"
 # define SLEEP						"is sleeping"
 # define DIE						"died"
+# define USLEEP						1
 
 /*################################INCLUDES###################################*/
 /*###########################################################################*/
@@ -65,18 +65,20 @@ typedef struct s_input
 typedef struct s_table
 {
 	int					single_meal;
+	int					all_add_started;
 	int					all_threads_created;
-	pthread_mutex_t		protect_all_threads_created;
 	int					threads_creation_failed;
-	pthread_mutex_t		protect_creation_failed;
+	int					time_each_philo_must_eat;
+	int					run_routine;
+	int					dinner_served;
 	unsigned int		nbr_of_philo;
 	unsigned int		time_to_die;
 	unsigned int		time_to_eat;
 	unsigned int		time_to_sleep;
 	long long			start_of_dinner;
-	int					time_each_philo_must_eat;
-	int					run_routine;
-	int					dinner_served;
+	pthread_mutex_t		protect_all_add_started;
+	pthread_mutex_t		protect_creation_failed;
+	pthread_mutex_t		protect_all_threads_created;
 	pthread_mutex_t		protect_dinner_served;
 	pthread_mutex_t		protect_run_routine;
 	pthread_mutex_t		protect_message;

@@ -6,11 +6,15 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 09:24:13 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/06 13:07:18 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 15:09:47 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	wait_for_odd(t_philo *philo);
+static int	odd_philo_nbr(t_philo *philo);
+static int	all_add_philos_started(t_philo *philo);
 
 int	all_threads_created(t_philo *philo)
 {
@@ -22,5 +26,43 @@ int	all_threads_created(t_philo *philo)
 		}
 		usleep(50);
 	}
+	wait_for_odd(philo);
+	(void)wait_for_odd;
 	return (true);
 }
+
+static void	wait_for_odd(t_philo *philo)
+{
+	if (philo->id % 2)
+	{
+		pthread_mutex_lock(&philo->table->protect_all_add_started);
+		philo->table->all_add_started++;
+		pthread_mutex_unlock(&philo->table->protect_all_add_started);
+		return ;
+	}
+	while (all_add_philos_started( philo) == false)
+	{
+		usleep(50);
+	}
+
+}
+
+static int	all_add_philos_started(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->table->protect_all_add_started);
+	if (philo->table->all_add_started >= odd_philo_nbr(philo))
+	{
+		pthread_mutex_unlock(&philo->table->protect_all_add_started);
+		return (true);
+	}
+	pthread_mutex_unlock(&philo->table->protect_all_add_started);
+	return (false);
+	
+}
+
+static int	odd_philo_nbr(t_philo *philo)
+{
+	return ((int)(philo->table->nbr_of_philo / 2)
+			+ philo->table->nbr_of_philo % 2);
+}
+

@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:41:40 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 15:43:45 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 15:07:46 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	create_table(t_table **table, t_input *input)
 	t_table			*tmp_table;
 
 	tmp_table = malloc(sizeof(t_table));
+	ft_bzero(tmp_table, sizeof(t_table));
 	if (tmp_table == NULL)
 		return (free(input), false);
 	set_input_to_table(input, tmp_table);
@@ -50,6 +51,7 @@ static void	set_table_variables(t_table *table)
 	table->run_routine = true;
 	table->all_threads_created = false;
 	table->threads_creation_failed = false;
+	table->all_add_started = 0;
 	if (table->nbr_of_philo == 1)
 		table->single_meal = true;
 	else
@@ -59,6 +61,8 @@ static void	set_table_variables(t_table *table)
 static int	create_table_mutex(t_table *table)
 {
 	if (pthread_mutex_init(&table->protect_message, NULL) != 0)
+		return (false);
+	if (pthread_mutex_init(&table->protect_all_add_started, NULL) != 0)
 		return (false);
 	if (pthread_mutex_init(&table->protect_run_routine, NULL) != 0)
 		return (false);
