@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 00:38:11 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 18:36:37 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 13:04:25 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*routine(void *arg)
 {
 	t_philo		*philo;
 	t_routine	routine;
-	
+
 	if (start_routine_check(&philo, &routine, arg) == false)
 		return ((void *) philo);
 	while (run_routine_check(philo) == true)

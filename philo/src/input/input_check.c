@@ -6,17 +6,17 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:31:51 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/04 17:29:14 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 13:09:13 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	not_numer (t_input *input);
-static int	bigger_max_int (t_input *input);
-static int zero_or_less_philo (t_input *input);
+static int	not_numer(t_input *input);
+static int	bigger_max_int(t_input *input);
+static int	zero_or_less_philo(t_input *input);
 
-int	is_input_valide (t_input *input)
+int	is_input_valide(t_input *input)
 {
 	if (input->ac < 5 || input->ac > 6)
 		return (error(WRONG_NUMBER_OF_ARGS), free(input), false);
@@ -29,7 +29,7 @@ int	is_input_valide (t_input *input)
 	return (true);
 }
 
-static int	not_numer (t_input *input)
+static int	not_numer(t_input *input)
 {
 	int		i;
 	int		j;
@@ -49,7 +49,7 @@ static int	not_numer (t_input *input)
 	return (false);
 }
 
-static int	bigger_max_int (t_input *input)
+static int	bigger_max_int(t_input *input)
 {
 	int		i;
 
@@ -63,7 +63,7 @@ static int	bigger_max_int (t_input *input)
 	return (false);
 }
 
-static int zero_or_less_philo (t_input *input)
+static int	zero_or_less_philo(t_input *input)
 {
 	if (ft_atoi(input->av[1]) < 1)
 		return (true);

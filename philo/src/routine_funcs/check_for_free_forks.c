@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:58:36 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 18:54:17 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 13:07:00 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	check_for_free_forks(t_philo *philo, t_routine *routine)
 		}
 	}
 }
-
 
 static int	left_and_right_fork_is_free(t_philo *philo)
 {

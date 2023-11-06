@@ -6,13 +6,13 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:35:23 by fgabler           #+#    #+#             */
-/*   Updated: 2023/10/24 12:37:46 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 13:00:20 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long long	get_current_time_in_mill()
+long long	get_current_time_in_mill(void)
 {
 	struct timeval	start_time;
 	long long		time_in_mill;

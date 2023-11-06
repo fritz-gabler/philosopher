@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,14 +6,14 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 09:28:17 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 13:18:12 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*##########################FILE_DEFINITION##################################*/
 /*###########################################################################*/
 
-# ifndef PHILO_H
+#ifndef PHILO_H
 # define PHILO_H
 
 /*###############################DEFINITION##################################*/
@@ -45,12 +44,12 @@
 /*################################INCLUDES###################################*/
 /*###########################################################################*/
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <pthread.h>
-#include <sys/time.h>
-#include <limits.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <pthread.h>
+# include <sys/time.h>
+# include <limits.h>
 
 /*###############################DEFINITION##################################*/
 /*###########################################################################*/
@@ -109,8 +108,8 @@ typedef struct s_routine
 /*###########################################################################*/
 
 //INPUT
-void			get_input (t_input **input, int ac, char **av);
-int				is_input_valide (t_input *input);
+void			get_input(t_input **input, int ac, char **av);
+int				is_input_valide(t_input *input);
 
 //ERROR
 void			error(int error);
@@ -119,7 +118,7 @@ void			error(int error);
 int				ft_isdigit(int c);
 long			ft_strtol(const char *str);
 int				ft_atoi(const char *str);
-long long		get_current_time_in_mill();
+long long		get_current_time_in_mill(void);
 void			sleep_and_death_check(int time_to_sleep, t_philo *philo);
 void			ft_bzero(void *s, size_t n);
 
@@ -140,7 +139,7 @@ int				philo_died(t_philo *philo);
 void			philo_is_thinking(t_philo *philo, t_routine *routine);
 void			check_for_free_forks(t_philo *philo, t_routine *routine);
 void			philo_is_eating(t_philo *philo, t_routine *routine);
-void			philo_is_sleeping(t_philo * philo, t_routine *routine);
+void			philo_is_sleeping(t_philo *philo, t_routine *routine);
 int				run_routine_check(t_philo *philo);
 void			check_times_eaten(t_philo *philo);
 int				all_threads_created(t_philo *philo);
@@ -151,9 +150,9 @@ void			set_creation_failed(t_philo *philo);
 int				check_all_threads_created(t_philo *philo);
 
 //CLEAR
-void			clear_structs(t_philo **philo, t_table **table, int nbr_of_philo);
+void			clear_structs(t_philo **philo,
+					t_table **table, int nbr_of_philo);
 void			wait_for_threads(t_philo *philo, int nbr_of_threads);
 void			destroy_all_mutex(t_philo *philo, int nbr_of_threads);
 
 #endif
-

@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 12:08:05 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 11:18:43 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 13:19:10 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	set_one_philo(t_philo **philo, t_table *table);
 static void	set_philo_content(t_philo *philo, t_table *table, int id);
 static void	set_ptr_to_next_philo(t_philo *philo,
-		unsigned int i, t_philo **save_philo);
+				unsigned int i, t_philo **save_philo);
 
 int	create_philo_struct(t_philo **philo, t_table *table)
 {

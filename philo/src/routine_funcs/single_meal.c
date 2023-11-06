@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 10:33:39 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 11:34:14 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 13:03:08 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	single_meal(t_philo *philo)
 
 static void	wait_till_philo_died(t_philo *philo)
 {
-	while(philo_died( philo) == false)
+	while (philo_died(philo) == false)
 		usleep(1000);
 	return ;
 }

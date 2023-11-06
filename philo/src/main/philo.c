@@ -6,13 +6,13 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:19 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 16:41:03 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 13:09:34 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main (int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_input		*input;
 	t_philo		*philo;

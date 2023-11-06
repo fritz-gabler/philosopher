@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 15:59:30 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/05 16:24:33 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 13:01:37 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	set_creation_failed(t_philo *philo)
 	pthread_mutex_lock(&philo->table->protect_creation_failed);
 	philo->table->threads_creation_failed = true;
 	pthread_mutex_unlock(&philo->table->protect_creation_failed);
-	
 }
 
 void	set_all_threads_created(t_philo *philo)

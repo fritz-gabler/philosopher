@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 09:24:13 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/06 09:08:28 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/06 13:07:18 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 int	all_threads_created(t_philo *philo)
 {
-	while(check_all_threads_created(philo) == false)
+	while (check_all_threads_created(philo) == false)
 	{
-
 		if (threads_creation_failed(philo) == true)
 		{
 			return (false);
