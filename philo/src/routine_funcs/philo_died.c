@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 13:26:57 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/06 13:05:39 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/07 11:27:43 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ static void	get_last_time_eaten(long long *last_time_eaten, t_philo *philo)
 
 static void	stop_routine(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->table->protect_run_routine);
 	philo->table->run_routine = false;
+	pthread_mutex_unlock(&philo->table->protect_run_routine);
 }
 
 static void	announce_deth(t_philo *philo)

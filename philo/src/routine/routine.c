@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 00:38:11 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/06 14:43:26 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/07 12:32:33 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	*routine(void *arg)
 		philo_is_sleeping(philo, &routine);
 		philo_is_thinking(philo, &routine);
 		philo_died(philo);
+		usleep(100);
 	}
 	return ((void *) philo);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
+/*   By: fgabler <fgabler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:02:41 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/06 15:25:12 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/07 11:10:40 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define EAT						"is eating"
 # define SLEEP						"is sleeping"
 # define DIE						"died"
-# define USLEEP						1
+# define USLEEP						100
 
 /*################################INCLUDES###################################*/
 /*###########################################################################*/
@@ -82,6 +82,7 @@ typedef struct s_table
 	pthread_mutex_t		protect_dinner_served;
 	pthread_mutex_t		protect_run_routine;
 	pthread_mutex_t		protect_message;
+	pthread_mutex_t		protect_start_time;
 	void				*first_philo;
 }	t_table;
 

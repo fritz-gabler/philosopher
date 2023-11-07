@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:38:00 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/06 10:37:05 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/07 11:15:45 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,10 @@ void	print_save(char *message, t_philo *philo)
 
 static long long	get_time(t_philo *philo)
 {
-	return (get_current_time_in_mill() - philo->table->start_of_dinner);
+	long long	get_time;
+
+	pthread_mutex_lock(&philo->table->protect_start_time);
+	get_time = get_current_time_in_mill() - philo->table->start_of_dinner;
+	pthread_mutex_unlock(&philo->table->protect_start_time);
+	return (get_time);
 }

@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:41:40 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/06 15:07:46 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/07 11:11:05 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	set_input_to_table(t_input *input, t_table *table)
 
 static void	set_table_variables(t_table *table)
 {
-	table->start_of_dinner = get_current_time_in_mill();
 	table->run_routine = true;
 	table->all_threads_created = false;
 	table->threads_creation_failed = false;
@@ -71,6 +70,8 @@ static int	create_table_mutex(t_table *table)
 	if (pthread_mutex_init(&table->protect_creation_failed, NULL) != 0)
 		return (false);
 	if (pthread_mutex_init(&table->protect_all_threads_created, NULL) != 0)
+		return (false);
+	if (pthread_mutex_init(&table->protect_start_time, NULL) != 0)
 		return (false);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: fgabler <mail@student.42heilbronn.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:58:36 by fgabler           #+#    #+#             */
-/*   Updated: 2023/11/06 13:07:00 by fgabler          ###   ########.fr       */
+/*   Updated: 2023/11/07 13:18:53 by fgabler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	set_forks_are_in_use(t_philo *philo);
 static int	left_and_right_fork_is_free(t_philo *philo);
+static void	get_right_fork(t_philo *philo);
+static void	get_left_fork(t_philo *philo);
 
 void	check_for_free_forks(t_philo *philo, t_routine *routine)
 {
@@ -52,10 +54,28 @@ static int	left_and_right_fork_is_free(t_philo *philo)
 
 static void	set_forks_are_in_use(t_philo *philo)
 {
+	if (philo->id % 2)
+	{
+		get_left_fork(philo);
+		get_right_fork(philo);
+	}
+	else
+	{
+		get_right_fork(philo);
+		get_left_fork(philo);
+	}
+}
+
+static void	get_left_fork(t_philo *philo)
+{
 	pthread_mutex_lock(&philo->protect_fork);
-	pthread_mutex_lock(&philo->next_philo->protect_fork);
 	philo->fork = FORK_IN_USE;
+	pthread_mutex_unlock(&philo->protect_fork);
+}
+
+static void	get_right_fork(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->next_philo->protect_fork);
 	philo->next_philo->fork = FORK_IN_USE;
 	pthread_mutex_unlock(&philo->next_philo->protect_fork);
-	pthread_mutex_unlock(&philo->protect_fork);
 }

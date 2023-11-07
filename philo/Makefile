@@ -8,7 +8,7 @@ NAME = philo
 
 CC			:=			cc
 HEADERS 	:=			-I./include
-CFLAGS		?=			-Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS		?=			-Wall -Werror -Wextra
 
 ###############################################################################
 ###############################################################################
@@ -49,7 +49,7 @@ OBJ			:=			$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -lpthread
 	@printf "$(_SUCCESS) phlio executable is build.\n"
 
 $(OBJ_DIR)/%.o: %.c
@@ -85,7 +85,7 @@ re: fclean all
 YELLOW		:=		"\033[33m"
 RED			:=			"\033[31m"
 GREEN		:=		"\033[32m"
-RESET		:=		"\033[0m" 
+RESET		:=		"\033[0m"
 G			=		\e[38;5;118m
 YE			=		\e[38;5;226m
 RE			=		\e[0m
